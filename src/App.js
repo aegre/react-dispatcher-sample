@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useCallback } from 'react';
 import './App.css';
+import List from './List';
+import Form from './Form';
 
-function App() {
+const App = () => {
+  const [showForm, setShowForm] = useState(true)
+  const hideForn = useCallback(() => setShowForm( showForm => !showForm ), [])
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          React dispatcher sample
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <h1>To do list</h1>
+      <p>
+        {
+          showForm && <Form/>
+        }
+      </p>
+      <button onClick={hideForn}>Remove form</button>
+      <List/>
     </div>
   );
 }
